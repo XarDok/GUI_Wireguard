@@ -1,0 +1,15 @@
+Я наконец нашел способ заставить его работать на Ubuntu 20.04. Вот шаги, которые вам нужно сделать. Может быть, это поможет кому-то в будущем :
+
+Установите необходимые пакеты для сборки и использования плагина :
+
+sudo apt install wireguard git dh-autoreconf libglib2.0-dev intltool build-essential libgtk-3-dev libnma-dev libsecret-1-dev network-manager-dev resolvconf
+Клонируйте плагин из github, скомпилируйте и установите его :
+
+git clone https://github.com/max-moser/network-manager-wireguard
+cd network-manager-wireguard
+./autogen.sh --without-libnm-glib
+
+./configure --without-libnm-glib --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib/x86_64-linux-gnu --libexecdir=/usr/lib/NetworkManager --localstatedir=/var
+
+make   
+sudo make install
